@@ -32,10 +32,10 @@ func (g GenderEnum) EnumIndex() int {
 // }
 
 type Person struct {
-	Id                 int                       `json:"id"`
-	Name               string                    `json:"name"`
-	Gender             string                    `json:"gender,omitempty"`
-	RelationMapForward map[string]map[string]int `json:"relationMapForward,omitempty"`
+	Id                 int                         `json:"id"`
+	Name               string                      `json:"name"`
+	Gender             string                      `json:"gender,omitempty"`
+	RelationMapForward map[string]map[string][]int `json:"relationMapForward,omitempty"`
 }
 
 // type Wedlock struct {

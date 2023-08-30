@@ -37,7 +37,7 @@ func AddPerson(name string, gender string) {
 			listOfPerson = append(listOfPerson, newPerson)
 			globalvar.PersonHashMap[name] = listOfPerson
 		} else {
-			fmt.Println("dont add")
+			// fmt.Println("dont add")
 		}
 
 	} else {

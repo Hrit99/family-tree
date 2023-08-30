@@ -17,7 +17,7 @@ func BinToString(s string) string {
 	for _, v := range s {
 		if count == 7 {
 			if i, err := strconv.ParseInt(str, 2, 64); err != nil {
-				fmt.Println(err)
+				// fmt.Println(err)
 			} else {
 				finalStr = fmt.Sprintf("%s%v", finalStr, string(rune(i)))
 			}
@@ -29,7 +29,7 @@ func BinToString(s string) string {
 	}
 	if count != 0 {
 		if i, err := strconv.ParseInt(str, 2, 64); err != nil {
-			fmt.Println(err)
+			// fmt.Println(err)
 		} else {
 			finalStr = fmt.Sprintf("%s%v", finalStr, string(rune(i)))
 		}
@@ -51,7 +51,7 @@ func decryptString(s []byte) string {
 		if rounds == len(s) {
 			i, err := strconv.Atoi(string(leftbit))
 			if err != nil {
-				fmt.Println(err)
+				// fmt.Println(err)
 			}
 			zta = i - bi
 		}
@@ -68,7 +68,7 @@ func ReadFilePerson() []models.Person {
 
 	bb, err := os.ReadFile("person.bin")
 	if err != nil {
-		fmt.Println("error occured")
+		// fmt.Println("error occured")
 		return make([]models.Person, 0)
 	}
 
@@ -82,9 +82,9 @@ func ReadFilePerson() []models.Person {
 		decoded := models.Person{}
 		json.Unmarshal([]byte(decodedStr), &decoded)
 		if decoded.RelationMapForward == nil {
-			decoded.RelationMapForward = make(map[string]map[string]int)
+			decoded.RelationMapForward = make(map[string]map[string][]int)
 		}
-		println(decodedStr)
+		// println(decodedStr)
 		arrToReturn = append(arrToReturn, decoded)
 	}
 	return arrToReturn
@@ -94,7 +94,7 @@ func ReadFileRelation() []models.Relation {
 
 	bb, err := os.ReadFile("relation.bin")
 	if err != nil {
-		fmt.Println("error occured")
+		// fmt.Println("error occured")
 		return make([]models.Relation, 0)
 	}
 

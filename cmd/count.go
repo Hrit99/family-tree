@@ -5,7 +5,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+	http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,23 +16,21 @@ limitations under the License.
 package cmd
 
 import (
-	"fmt"
-
+	"github.com/Hrit99/family-tree/cmd/queries"
+	getqueries "github.com/Hrit99/family-tree/getQueries"
 	"github.com/spf13/cobra"
 )
 
 // countCmd represents the count command
 var countCmd = &cobra.Command{
 	Use:   "count",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Used to count number of specific relatives",
+	Long: `THis command is used to count the number of relatives with the specified relation of a person.
+	The format for the command is family-tree count <relation> of <person>`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("count called")
+		if args[1] == "of" {
+			queries.CountQuery(*getqueries.GetPersonWithName(args[2]), *getqueries.GetRelation(args[0]))
+		}
 	},
 }
 

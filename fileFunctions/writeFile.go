@@ -11,7 +11,7 @@ import (
 func WriteFilePerson(newPerson models.Person, fileName string) {
 	b, err := json.Marshal(newPerson)
 	if err != nil {
-		fmt.Println(err)
+
 		return
 	}
 	bitString := stringToBin(string(b))
@@ -22,7 +22,7 @@ func WriteFilePerson(newPerson models.Person, fileName string) {
 func WriteFileRelation(newRelation models.Relation, fileName string) {
 	b, err := json.Marshal(newRelation)
 	if err != nil {
-		fmt.Println(err)
+
 		return
 	}
 	bitString := stringToBin(string(b))
@@ -32,20 +32,20 @@ func WriteFileRelation(newRelation models.Relation, fileName string) {
 
 func writeInFile(encryptStr string, fileName string) {
 	if _, err := os.Stat(fileName); err == nil {
-		fmt.Printf("File exists\n")
+
 		myfile, err := os.OpenFile(fileName, os.O_APPEND|os.O_WRONLY, 0644)
 		if err != nil {
-			fmt.Println(err)
+
 		}
 		defer myfile.Close()
 
 		// Write the string to the file
 		_, err = myfile.WriteString(" " + encryptStr)
 		if err != nil {
-			fmt.Println(err)
+
 		}
 	} else {
-		fmt.Printf("File does not exist\n")
+
 		os.WriteFile(fileName, []byte(encryptStr), 0644)
 	}
 }

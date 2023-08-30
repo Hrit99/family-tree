@@ -22,13 +22,9 @@ import (
 // asCmd represents the as command
 var asCmd = &cobra.Command{
 	Use:   "as",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "'as' command is used to specify the type of relation.",
+	Long: `This command specifies the type of relation between two given person. 
+	The syntax goes like <Person1> as <Relation> of <Person2>.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		if args[3] == "of" {
 			ofCmd.Run(cmd, args)

@@ -13,70 +13,38 @@ func ConnectRelation(personOne *models.Person, personTwo *models.Person, relatio
 	} else if personOne.Gender != relation.Gender {
 		fmt.Println("unable to connect. Gender does not match")
 	} else {
-		val, ok := personOne.RelationMapForward[relation.Name]
-		if ok {
+		toAddConnection(personOne, personTwo, relation.Name)
 
-			_, okk := val[personTwo.Name]
-			if okk {
-				//do nothing
-			} else {
-				val[personTwo.Name] = personTwo.Id
-			}
-
-			personOne.RelationMapForward[relation.Name] = val
-		} else {
-			arr := make(map[string]int)
-			arr[personTwo.Name] = personTwo.Id
-			personOne.RelationMapForward[relation.Name] = arr
-		}
-
-		if personTwo.Gender == models.Female.String() && relation.FemaleOpposite != "" {
-			val, ok = personTwo.RelationMapForward[relation.FemaleOpposite]
-			if ok {
-				_, okk := val[personOne.Name]
-				if okk {
-					//do nothing
-				} else {
-					val[personOne.Name] = personOne.Id
-				}
-				personTwo.RelationMapForward[relation.FemaleOpposite] = val
-			} else {
-				arr := make(map[string]int)
-				arr[personOne.Name] = personOne.Id
-				personTwo.RelationMapForward[relation.FemaleOpposite] = arr
-			}
-		} else if personTwo.Gender == models.Male.String() && relation.MaleOpposite != "" {
-			val, ok = personTwo.RelationMapForward[relation.MaleOpposite]
-			if ok {
-				_, okk := val[personOne.Name]
-				if okk {
-					//do nothing
-				} else {
-					val[personOne.Name] = personOne.Id
-				}
-				personTwo.RelationMapForward[relation.MaleOpposite] = val
-			} else {
-				arr := make(map[string]int)
-				arr[personOne.Name] = personOne.Id
-				personTwo.RelationMapForward[relation.MaleOpposite] = arr
-			}
+		if personOne.Gender == models.Female.String() && relation.FemaleOpposite != "" {
+			toAddConnection(personTwo, personOne, relation.FemaleOpposite)
+		} else if personOne.Gender == models.Male.String() && relation.MaleOpposite != "" {
+			toAddConnection(personTwo, personOne, relation.MaleOpposite)
 		} else if relation.Opposite != "" {
-			val, ok = personTwo.RelationMapForward[relation.Opposite]
-			if ok {
-				_, okk := val[personOne.Name]
-				if okk {
-					//do nothing
-				} else {
-					val[personOne.Name] = personOne.Id
-				}
-				personTwo.RelationMapForward[relation.Opposite] = val
-			} else {
-				arr := make(map[string]int)
-				arr[personOne.Name] = personOne.Id
-				personTwo.RelationMapForward[relation.Opposite] = arr
-			}
+			toAddConnection(personTwo, personOne, relation.Opposite)
 		}
 		filefunctions.UpdateFilePerson(*personOne)
 		filefunctions.UpdateFilePerson(*personTwo)
+	}
+}
+
+func toAddConnection(personOne *models.Person, personTwo *models.Person, relationName string) {
+	val, ok := personTwo.RelationMapForward[relationName]
+	if ok {
+		flag := true
+		for _, v := range val[personOne.Name] {
+			if v == personOne.Id {
+				flag = false
+			}
+		}
+		if flag {
+			val[personOne.Name] = append(val[personOne.Name], personOne.Id)
+			personTwo.RelationMapForward[relationName] = val
+		}
+	} else {
+		arr := make(map[string][]int)
+		li := make([]int, 0, 1)
+		li = append(li, personOne.Id)
+		arr[personOne.Name] = li
+		personTwo.RelationMapForward[relationName] = arr
 	}
 }

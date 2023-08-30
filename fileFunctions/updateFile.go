@@ -2,7 +2,6 @@ package filefunctions
 
 import (
 	"encoding/json"
-	"fmt"
 	"os"
 	"strings"
 
@@ -45,7 +44,7 @@ func UpdateFileRelation(newRelation models.Relation) {
 func getEncyptedPersonStr(newPerson models.Person) string {
 	b, err := json.Marshal(newPerson)
 	if err != nil {
-		fmt.Println(err)
+		// fmt.Println(err)
 		return ""
 	}
 	bitString := stringToBin(string(b))
@@ -55,7 +54,7 @@ func getEncyptedPersonStr(newPerson models.Person) string {
 func getEncyptedRelationStr(newRelation models.Relation) string {
 	b, err := json.Marshal(newRelation)
 	if err != nil {
-		fmt.Println(err)
+		// fmt.Println(err)
 		return ""
 	}
 	bitString := stringToBin(string(b))

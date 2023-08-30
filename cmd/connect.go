@@ -16,23 +16,16 @@ limitations under the License.
 package cmd
 
 import (
-	"fmt"
-
 	"github.com/spf13/cobra"
 )
 
 // connectCmd represents the connect command
 var connectCmd = &cobra.Command{
 	Use:   "connect",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "'connect' command is used to initiate a relation.",
+	Long: `This command is used to connect two different person with a relation. 
+	It uses subcommands such as "as" and "of" to specify relation and direction of the relation.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("connect called")
 		// createqueries.ConnectRelation(getqueries.GetPersonWithName(args[0]))
 		if args[1] == "as" {
 			asCmd.Run(cmd, args)
@@ -41,7 +34,6 @@ to quickly create a Cobra application.`,
 }
 
 func init() {
-	fmt.Println("in cnn")
 	rootCmd.AddCommand(connectCmd)
 
 	// Here you will define your flags and configuration settings.

@@ -16,30 +16,34 @@ limitations under the License.
 package cmd
 
 import (
+	"github.com/Hrit99/family-tree/cmd/queries"
+	getqueries "github.com/Hrit99/family-tree/getQueries"
 	"github.com/spf13/cobra"
 )
 
-// addCmd represents the add command
-var addCmd = &cobra.Command{
-	Use:   "add",
-	Short: "This command is used to add a new person or new relation.",
-	Long: `add command is used after family-tree to add a new person and store it. 
-	It is also used to add a new relation and store it. 
-	The format goes like family-tree add <sub-Command> <name>`,
+// getCmd represents the get command
+var getCmd = &cobra.Command{
+	Use:   "get",
+	Short: "Command to get the relatives",
+	Long: `This command is used to get all the relatives with the specified relation for a person.
+	The syntax for the command is as follows family-tree get <relation> of <Person>`,
 	Run: func(cmd *cobra.Command, args []string) {
+		if args[1] == "of" {
+			queries.GetRelatives(*getqueries.GetRelation(args[0]), *getqueries.GetPersonWithName(args[2]))
+		}
 	},
 }
 
 func init() {
-	rootCmd.AddCommand(addCmd)
+	rootCmd.AddCommand(getCmd)
 
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
-	// addCmd.PersistentFlags().String("foo", "", "A help for foo")
+	// getCmd.PersistentFlags().String("foo", "", "A help for foo")
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
-	// addCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	// getCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

@@ -16,8 +16,6 @@ limitations under the License.
 package cmd
 
 import (
-	"fmt"
-
 	createqueries "github.com/Hrit99/family-tree/createQueries"
 	"github.com/spf13/cobra"
 )
@@ -25,15 +23,11 @@ import (
 // relationCmd represents the relation command
 var relationCmd = &cobra.Command{
 	Use:   "relation",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Command to create a relation",
+	Long: `This command is used to create a new relation entity. 
+	It is the subcommand for add command.
+	Format for this command id family-tree add relation <personName> -g <male/female>`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("relation called")
 		fstatus, _ := cmd.Flags().GetString("gender")
 		createqueries.AddRelation(args[0], fstatus)
 	},

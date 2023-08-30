@@ -16,8 +16,6 @@ limitations under the License.
 package cmd
 
 import (
-	"fmt"
-
 	createqueries "github.com/Hrit99/family-tree/createQueries"
 	getqueries "github.com/Hrit99/family-tree/getQueries"
 	"github.com/spf13/cobra"
@@ -26,15 +24,11 @@ import (
 // ofCmd represents the of command
 var ofCmd = &cobra.Command{
 	Use:   "of",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Command to specify the direction of relation.",
+	Long: `This command is used to declare the direction of the relation defined between two people.
+	It is subcommand for commands like connect and get.
+	The syntax for the command is family-tree <pre-command> ... <relation> of <Person>`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("of called")
 		createqueries.ConnectRelation(getqueries.GetPersonWithName(args[0]), getqueries.GetPersonWithName(args[4]), getqueries.GetRelation(args[2]))
 	},
 }
