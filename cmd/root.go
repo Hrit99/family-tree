@@ -112,5 +112,11 @@ func initHash() {
 		}
 	}
 
-	globalvar.RelationTypeLists = filefunctions.ReadFileRelation()
+	globalvar.RelationTypeLists = make(map[string]models.Relation)
+	relations := filefunctions.ReadFileRelation()
+	for _, relation := range relations {
+
+		globalvar.RelationTypeLists[relation.Name] = relation
+
+	}
 }

@@ -45,23 +45,20 @@ func decryptString(s []byte) string {
 	for _, b := range s {
 		rounds++
 		var str string
-		bi, err := fmt.Printf("%b", b)
-		if err != nil {
-			fmt.Println("error")
-		} else {
-			str = fmt.Sprintf("%b", b)
-			zta := (8 - bi)
-			if rounds == len(s) {
-				i, err := strconv.Atoi(string(leftbit))
-				if err != nil {
-					fmt.Println(err)
-				}
-				zta = i - bi
+		bi := len(fmt.Sprintf("%b", b))
+		str = fmt.Sprintf("%b", b)
+		zta := (8 - bi)
+		if rounds == len(s) {
+			i, err := strconv.Atoi(string(leftbit))
+			if err != nil {
+				fmt.Println(err)
 			}
-			for i := 0; i < zta; i++ {
-				str = fmt.Sprintf("%v%s", "0", str)
-			}
+			zta = i - bi
 		}
+		for i := 0; i < zta; i++ {
+			str = fmt.Sprintf("%v%s", "0", str)
+		}
+
 		finalStr = fmt.Sprintf("%s%v", finalStr, str)
 	}
 	return finalStr
@@ -84,14 +81,10 @@ func ReadFilePerson() []models.Person {
 		decodedStr := BinToString(decryptStr)
 		decoded := models.Person{}
 		json.Unmarshal([]byte(decodedStr), &decoded)
-		println("hola")
-		fmt.Println(decoded.RelationMapForward)
 		if decoded.RelationMapForward == nil {
 			decoded.RelationMapForward = make(map[string]map[string]int)
 		}
-		if decoded.RelationMapBackward == nil {
-			decoded.RelationMapBackward = make(map[string]map[string]int)
-		}
+		println(decodedStr)
 		arrToReturn = append(arrToReturn, decoded)
 	}
 	return arrToReturn

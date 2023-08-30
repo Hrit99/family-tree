@@ -11,8 +11,15 @@ import (
 	"github.com/Hrit99/family-tree/models"
 )
 
-func AddPerson(name string) {
+func AddPerson(name string, gender string) {
 	var newPerson models.Person
+	if gender == "male" {
+		gender = models.Male.String()
+	} else if gender == "female" {
+		gender = models.Female.String()
+	} else {
+		gender = models.Unknown.String()
+	}
 	if checkHashOfName(name) {
 		// add to hash list
 		fmt.Println("A person with same name already exists. Do you want to add person with same name??")
@@ -23,8 +30,9 @@ func AddPerson(name string) {
 		if strings.Compare("yes", text) == 0 {
 			listOfPerson := globalvar.PersonHashMap[name]
 			newPerson = models.Person{
-				Id:   len(listOfPerson),
-				Name: name,
+				Id:     len(listOfPerson),
+				Name:   name,
+				Gender: gender,
 			}
 			listOfPerson = append(listOfPerson, newPerson)
 			globalvar.PersonHashMap[name] = listOfPerson
@@ -34,8 +42,9 @@ func AddPerson(name string) {
 
 	} else {
 		newPerson = models.Person{
-			Id:   0,
-			Name: name,
+			Id:     0,
+			Name:   name,
+			Gender: gender,
 		}
 		listOfPerson := make([]models.Person, 0, 1)
 		listOfPerson = append(listOfPerson, newPerson)

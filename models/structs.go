@@ -4,8 +4,9 @@ type GenderEnum int
 type WedlockPositionEnum int
 
 const (
-	Male   GenderEnum = iota + 1 // EnumIndex = 1
-	Female                       // EnumIndex = 2
+	Male    GenderEnum = iota + 1 // EnumIndex = 1
+	Female                        // EnumIndex = 2
+	Unknown                       // EnumIndex = 3
 )
 
 // const (
@@ -15,7 +16,7 @@ const (
 // )
 
 func (g GenderEnum) String() string {
-	return [...]string{"Male", "Female"}[g-1]
+	return [...]string{"Male", "Female", "Unknown"}[g-1]
 }
 
 // func (g WedlockPositionEnum) String() string {
@@ -31,11 +32,10 @@ func (g GenderEnum) EnumIndex() int {
 // }
 
 type Person struct {
-	Id                  int                       `json:"id"`
-	Name                string                    `json:"name"`
-	Gender              string                    `json:"gender,omitempty"`
-	RelationMapForward  map[string]map[string]int `json:"relationMapForward,omitempty"`
-	RelationMapBackward map[string]map[string]int `json:"relationMapBackward,omitempty"`
+	Id                 int                       `json:"id"`
+	Name               string                    `json:"name"`
+	Gender             string                    `json:"gender,omitempty"`
+	RelationMapForward map[string]map[string]int `json:"relationMapForward,omitempty"`
 }
 
 // type Wedlock struct {
@@ -47,6 +47,9 @@ type Person struct {
 // }
 
 type Relation struct {
-	Name     string `json:"name"`
-	Opposite string `json:"opposite"`
+	Name           string `json:"name"`
+	Opposite       string `json:"Opposite"`
+	MaleOpposite   string `json:"maleOpposite"`
+	FemaleOpposite string `json:"femaleOpposite"`
+	Gender         string `json:"gender"`
 }

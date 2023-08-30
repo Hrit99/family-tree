@@ -20,6 +20,17 @@ func UpdateFilePerson(newPerson models.Person) {
 	}
 }
 
+func UpdateFileRelation(newRelation models.Relation) {
+	str := getEncyptedRelationStr(newRelation)
+	for _, relation := range ReadFileRelation() {
+		if relation.Name == newRelation.Name {
+			oldstr := getEncyptedRelationStr(relation)
+			bb, _ := os.ReadFile("relation.bin")
+			os.WriteFile("relation.bin", []byte(strings.Replace(string(bb), oldstr, str, -1)), 0644)
+		}
+	}
+}
+
 // func readFileUpdate(s string) []string {
 // 	bb, err := os.ReadFile(s)
 // 	if err != nil {
@@ -33,6 +44,16 @@ func UpdateFilePerson(newPerson models.Person) {
 
 func getEncyptedPersonStr(newPerson models.Person) string {
 	b, err := json.Marshal(newPerson)
+	if err != nil {
+		fmt.Println(err)
+		return ""
+	}
+	bitString := stringToBin(string(b))
+	return encryptString(bitString)
+}
+
+func getEncyptedRelationStr(newRelation models.Relation) string {
+	b, err := json.Marshal(newRelation)
 	if err != nil {
 		fmt.Println(err)
 		return ""

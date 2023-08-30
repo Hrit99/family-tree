@@ -5,7 +5,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-	http://www.apache.org/licenses/LICENSE-2.0
+    http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,13 +18,12 @@ package cmd
 import (
 	"fmt"
 
-	createqueries "github.com/Hrit99/family-tree/createQueries"
 	"github.com/spf13/cobra"
 )
 
-// relationCmd represents the relation command
-var relationCmd = &cobra.Command{
-	Use:   "relation",
+// countCmd represents the count command
+var countCmd = &cobra.Command{
+	Use:   "count",
 	Short: "A brief description of your command",
 	Long: `A longer description that spans multiple lines and likely contains examples
 and usage of using your command. For example:
@@ -33,22 +32,20 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("relation called")
-		fstatus, _ := cmd.Flags().GetString("gender")
-		createqueries.AddRelation(args[0], fstatus)
+		fmt.Println("count called")
 	},
 }
 
 func init() {
-	addCmd.AddCommand(relationCmd)
-	relationCmd.Flags().StringP("gender", "g", "Unknown", "Add Floating Numbers")
+	rootCmd.AddCommand(countCmd)
+
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
-	// relationCmd.PersistentFlags().String("foo", "", "A help for foo")
+	// countCmd.PersistentFlags().String("foo", "", "A help for foo")
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
-	// relationCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	// countCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
