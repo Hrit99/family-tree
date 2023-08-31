@@ -16,8 +16,8 @@ limitations under the License.
 package cmd
 
 import (
-	"github.com/Hrit99/family-tree/cmd/queries"
 	getqueries "github.com/Hrit99/family-tree/getQueries"
+	"github.com/Hrit99/family-tree/queries"
 	"github.com/spf13/cobra"
 )
 
