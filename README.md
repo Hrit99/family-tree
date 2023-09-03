@@ -1,8 +1,10 @@
 # family-tree
+
 github.com/Hrit99/family-tree
 
 A cli command to track people relationship records.
 
+## features
 
 It provides feature to : 
 
@@ -36,8 +38,7 @@ It provides feature to :
 IF USING SPACES IN NAMING PERSON OR RELATIONS THEN USE DOUBLE QUOTES i.e "SOME NAME"
 
 
-
-Installation :
+## Installation
 
 Steps :- 
 
