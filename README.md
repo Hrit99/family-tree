@@ -17,7 +17,7 @@ It provides feature to :
     b. get person with particular relatioon to a person.
         family-tree get <relation> of <name>
 
-IF USING SPACES IN NAMING PERSON OR RELATIONS THEN USE DOUBLE QUOTES i.e "SOME NAME"
+IF USING SPACES IN NAMING PERSON OR RELATIONS THEN USE DOUBLE QUOTES i.e. "SOME NAME"
 
 Installation :
 Steps :- 
