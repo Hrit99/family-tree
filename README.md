@@ -18,3 +18,8 @@ It provides feature to :
         family-tree get <relation> of <name>
 
 IF USING SPACES IN NAMING PERSON OR RELATIONS THEN USE DOUBLE QUOTES i.e. "SOME NAME"
+
+Installation :
+Steps :- 
+ 1. go get github.com/Hrit99/family-tree@latest
+ 2. go install github.com/Hrit99/family-tree@latest
